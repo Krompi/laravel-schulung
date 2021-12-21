@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\Posts\PostHasBeenCreated;
 use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
@@ -13,6 +14,8 @@ class PostController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except(['index', 'show']);
+        $this->middleware('erste.middleware');
+        $this->middleware('zweite.middleware');
     }
 
     /**
@@ -44,7 +47,8 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        Auth::user()->posts()->create($request->all());
+        $post = Auth::user()->posts()->create($request->all());
+        event(new PostHasBeenCreated($post));
         return redirect()->route('posts.index');
     }
 

@@ -1,5 +1,7 @@
 <?php
 
+use App\Providers\PostServiceProvider;
+
 return [
 
     /*
@@ -165,6 +167,11 @@ return [
         /*
          * Package Service Providers...
          */
+
+        /*
+         * Own Service Provider
+         */
+        App\Providers\PostServiceProvider::class,
 
         /*
          * Application Service Providers...
