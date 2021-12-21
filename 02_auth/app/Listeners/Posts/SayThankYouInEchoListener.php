@@ -26,6 +26,6 @@ class SayThankYouInEchoListener
      */
     public function handle(PostHasBeenCreated $event)
     {
-        dd($event->post->title);
+        // dd($event->post->title);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Listeners\Posts;
 
 use App\Events\Posts\PostHasBeenCreated;
+use App\Jobs\PostSendMailJob;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
@@ -26,6 +27,6 @@ class SendThankYouEmail
      */
     public function handle(PostHasBeenCreated $event)
     {
-        //
+        PostSendMailJob::dispatch($event->post);
     }
 }
